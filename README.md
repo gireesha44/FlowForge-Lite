@@ -6,11 +6,11 @@ FlowForge is a small distributed job-processing service built around PostgreSQL,
 
 The home page is intentionally focused on five separate engineering capabilities:
 
-1. **Successful Job** — creates a real `demo` job and watches `PENDING → RUNNING → COMPLETED`. The persisted attempt counter should become `1/3`.
-2. **Retry & Failure** — creates one `unstable` job with `fail=true`. BullMQ retries the same persisted job. The PostgreSQL attempt counter moves across attempts until the job reaches `FAILED`.
-3. **Timeout Handling** — creates a `sleep` job longer than the 15-second worker timeout. The timeout is treated as a failed execution and retried according to the configured maximum attempts.
-4. **Idempotency** — sends two HTTP requests with the exact same `Idempotency-Key`. The second request returns the first job ID with `deduplicated=true`. The UI then follows that same job ID so the worker's attempts are visible on the same record.
-5. **Concurrency** — submits multiple independent jobs in one burst. With `WORKER_CONCURRENCY=3`, up to three jobs can execute at once while the remaining jobs wait in the queue.
+1. **Successful Job** - creates a real `demo` job and watches `PENDING → RUNNING → COMPLETED`. The persisted attempt counter should become `1/3`.
+2. **Retry & Failure** - creates one `unstable` job with `fail=true`. BullMQ retries the same persisted job. The PostgreSQL attempt counter moves across attempts until the job reaches `FAILED`.
+3. **Timeout Handling** - creates a `sleep` job longer than the 15-second worker timeout. The timeout is treated as a failed execution and retried according to the configured maximum attempts.
+4. **Idempotency** - sends two HTTP requests with the exact same `Idempotency-Key`. The second request returns the first job ID with `deduplicated=true`. The UI then follows that same job ID so the worker's attempts are visible on the same record.
+5. **Concurrency** - submits multiple independent jobs in one burst. With `WORKER_CONCURRENCY=3`, up to three jobs can execute at once while the remaining jobs wait in the queue.
 
 Each scenario accepts useful inputs and displays live server-backed results. The home page also contains a console-style activity feed and a table of persisted jobs.
 
