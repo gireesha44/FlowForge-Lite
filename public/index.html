@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FlowForge interactive distributed job processing lab" />
+  <title>FlowForge — Engineering Console</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="FlowForge home">
+        <span class="brand-mark">F</span>
+        <span><b>FlowForge</b><small>distributed job processing</small></span>
+      </a>
+      <div class="top-status"><span class="dot" id="apiDot"></span><span id="apiState">Checking API…</span></div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">ENGINEERING CONSOLE</p>
+          <h1>See the queue do the work.</h1>
+          <p class="hero-copy">Five focused experiments. Real API calls. Real PostgreSQL records. Real Redis + BullMQ processing.</p>
+        </div>
+        <div class="stack-note"><span>Running on</span><b>Node.js · PostgreSQL · Redis · BullMQ</b></div>
+      </section>
+
+      <section class="card console-card">
+        <div class="section-head"><div><p class="eyebrow">HOME / CONSOLE</p><h2>Live system output</h2></div><button class="ghost" id="clearConsole">Clear</button></div>
+        <div class="console" id="consoleOutput" aria-live="polite"></div>
+      </section>
+
+      <section class="section-intro">
+        <div><p class="eyebrow">FIVE ENGINEERING TESTS</p><h2>Pick one capability to inspect</h2></div>
+        <p>Each section has its own inputs, expected behavior and live result. Nothing is simulated.</p>
+      </section>
+
+      <section class="scenario-grid">
+        <button class="scenario-card" data-scenario="success">
+          <span class="number">01</span><span class="icon success">✓</span><span class="scenario-copy"><b>Successful Job</b><small>Queue lifecycle · persistence</small><em>PENDING → RUNNING → COMPLETED</em></span><span class="arrow">→</span>
+        </button>
+        <button class="scenario-card" data-scenario="retry">
+          <span class="number">02</span><span class="icon retry">↻</span><span class="scenario-copy"><b>Retry & Failure</b><small>Failure recovery · attempts</small><em>One job · up to 3 attempts</em></span><span class="arrow">→</span>
+        </button>
+        <button class="scenario-card" data-scenario="timeout">
+          <span class="number">03</span><span class="icon timeout">15</span><span class="scenario-copy"><b>Timeout Handling</b><small>Execution guard · retries</small><em>20s work vs 15s limit</em></span><span class="arrow">→</span>
+        </button>
+        <button class="scenario-card" data-scenario="idempotency">
+          <span class="number">04</span><span class="icon idem">≡</span><span class="scenario-copy"><b>Idempotency</b><small>Duplicate request protection</small><em>Same key → same job ID</em></span><span class="arrow">→</span>
+        </button>
+        <button class="scenario-card wide" data-scenario="concurrency">
+          <span class="number">05</span><span class="icon concurrency">3×</span><span class="scenario-copy"><b>Concurrency</b><small>Parallel worker capacity</small><em>10 jobs · 3 workers at a time</em></span><span class="arrow">→</span>
+        </button>
+      </section>
+
+      <section class="card recent-card">
+        <div class="section-head"><div><p class="eyebrow">PERSISTED DATA</p><h2>Recent jobs</h2></div><button class="ghost" id="refreshJobs">Refresh</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Job ID</th><th>Type</th><th>Status</th><th>Attempts</th><th>Created</th></tr></thead><tbody id="jobsBody"><tr><td colspan="5">Loading…</td></tr></tbody></table></div>
+      </section>
+    </main>
+
+    <footer><b>FlowForge</b><span>real API data · no mock jobs</span><span id="footerApi">API checking…</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true">
+      <button class="close" id="closeModal" aria-label="Close">×</button>
+      <p class="eyebrow" id="modalKicker"></p><h2 id="modalTitle"></h2><p class="modal-desc" id="modalDescription"></p>
+      <div class="how-box"><b>What this proves</b><span id="modalExpectation"></span></div>
+      <div id="scenarioControls"></div>
+      <div class="modal-actions"><button class="primary" id="runScenario">Run test</button><button class="secondary" id="closeModal2">Close</button></div>
+      <div class="result-panel" id="resultPanel"><div class="result-empty">Run the test to see live server output here.</div></div>
+    </section>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

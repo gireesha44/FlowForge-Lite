@@ -1,0 +1,26 @@
+{
+  "name": "flowforge-lite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fault-tolerant asynchronous job processing service for SDE portfolio work.",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "worker": "node src/workers/worker.js",
+    "test": "node --test",
+    "db:init": "node src/db/init.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.58.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "ioredis": "^5.7.0",
+    "pg": "^8.16.3",
+    "pino": "^9.9.0",
+    "pino-http": "^10.5.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {}
+}
